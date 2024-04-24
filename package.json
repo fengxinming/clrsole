@@ -1,0 +1,53 @@
+{
+  "name": "clrsole",
+  "description": "colorful console.log.",
+  "version": "4.0.0",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "deps": "npm run clean && pnpm i",
+    "clean": "rm -rf node_modules",
+    "build": "vite build",
+    "test": "npm run build && node ./test/index.mjs",
+    "eslint": "eslint --ext .js,.mjs,.jsx,.ts,.tsx --fix --ignore-path .eslintignore ./",
+    "prepare": "husky",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fengxinming/clrsole.git"
+  },
+  "keywords": [
+    "console",
+    "log",
+    "color"
+  ],
+  "author": "Jesse Feng <fxm0016@126.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fengxinming/clrsole/issues"
+  },
+  "homepage": "https://github.com/fengxinming/clrsole#readme",
+  "dependencies": {
+    "base-log-factory": "^1.0.2",
+    "picocolors": "^1.0.0",
+    "tslib": "^2.6.2"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.2.0",
+    "@commitlint/config-conventional": "^19.1.0",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@types/node": "^20.12.7",
+    "eslint": "^8.57.0",
+    "eslint-config-fe": "^2.1.2",
+    "eslint-plugin-simple-import-sort": "^12.1.0",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
+    "vite": "^5.2.9",
+    "vite-plugin-external": "^4.3.1"
+  },
+  "files": [
+    "dist"
+  ]
+}
