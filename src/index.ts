@@ -65,4 +65,6 @@ Object.entries(pc).forEach(([color, fn]) => {
   }
 });
 
+export { Level };
+
 export * from './typings';

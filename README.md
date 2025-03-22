@@ -10,7 +10,7 @@
 
 ---
 
-### Features
+## Features
 - 🎨 **Colorized output**: Green/Red/Yellow/Blue for different message types
 - 📝 **6-level logging**: trace/debug/info/warn/error/fatal
 - 🛠 **Flexible formatting**: Customize log message templates
@@ -18,16 +18,16 @@
 
 ---
 
-### Installation
+## Installation
 ```bash
 npm install clrsole
 ```
 
 ---
 
-### Getting Started
+## Getting Started
 
-#### Basic Usage
+### Basic Usage
 ```javascript
 import { getLogger, clrsole } from 'clrsole';
 
@@ -43,7 +43,7 @@ clrsole.green('Success message');
 clrsole.red('Error occurred', new Error('Detailed error'));
 ```
 
-#### Output Example
+### Output Example
 ```text
 \x1b[32m[2023-08-01 10:00:00.620+08:00] [INFO] [app] - User login success: { userId: 123, ... }\x1b[0m
 \x1b[31m[2023-08-01 10:01:00.620+08:00] [ERROR] [app] - Request failed: { statusCode: 500 }\x1b[0m
@@ -51,9 +51,9 @@ clrsole.red('Error occurred', new Error('Detailed error'));
 
 ---
 
-### Advanced Features
+## Advanced Features
 
-#### Level Control
+### Level Control
 ```javascript
 // Only log warnings and above
 appLogger.level = 'warn';
@@ -61,11 +61,15 @@ appLogger.level = 'warn';
 
 ---
 
-### Contribution Guide
-- Follow [coding standards](docs/coding-standard.md)
-- Run `npm test` before submitting PRs
+## Contributing
 
----
+We welcome contributions from the community! If you find a bug or want to suggest an improvement, feel free to open an issue or submit a pull request.
 
-### License
-MIT License
+### How to Contribute
+1. Fork the repository.
+2. Create a new branch for your changes.
+3. Submit a pull request with a clear description of your changes.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
