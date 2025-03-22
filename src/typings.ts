@@ -6,7 +6,7 @@ export interface Options {
 
 export { Level } from 'base-log-factory';
 
-export type Formatter = (input: string | number | null | undefined) => string;
+export type Formatter = (...args: any[]) => string;
 
 export interface Clrsole {
 	reset: Formatter;
