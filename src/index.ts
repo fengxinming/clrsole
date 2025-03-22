@@ -1,73 +1,68 @@
 import { inspect } from 'node:util';
 
-import { createFactory, format, LogOptions, TLogLevel } from 'base-log-factory';
+import { basicLogPrefix, ConsoleAppender, ILayout, ILogEvent, Level, LogFactory } from 'base-log-factory';
 import pc from 'picocolors';
 
-import { Clrsole, LoggerOptions } from './typings';
+import { Clrsole, Options } from './typings';
 
 const levels = {
-  FATAL: 'magenta',
-  ERROR: 'red',
-  WARN: 'yellow',
-  INFO: 'green',
-  DEBUG: 'cyan',
-  TRACE: 'blue'
+  [Level.FATAL]: 'magenta',
+  [Level.ERROR]: 'red',
+  [Level.WARN]: 'yellow',
+  [Level.INFO]: 'green',
+  [Level.DEBUG]: 'cyan',
+  [Level.TRACE]: 'blue'
 };
 
-function colorText(color: string, root: string, messages: any[]): string {
+function colorText(color: string, root: string, messages: any[], depth: number): string {
   for (let i = 0, len = messages.length, tmp; i < len; i++) {
     tmp = messages[i];
     switch (typeof tmp) {
       case 'object':
-        tmp = inspect(tmp, { depth: Infinity });
+        tmp = inspect(tmp, { depth });
         break;
       case 'symbol':
         tmp = tmp.toString();
         break;
     }
-    if (i > 0) {
-      root += ' ';
-    }
-    root += tmp;
+    root += ` ${tmp}`;
   }
   return color ? pc[color](root) : root;
 }
 
-const DEFAULT_FORMATTER = 'YYYY-MM-DD HH:mm:ss.SSSZ';
-function defaultLayout(messages: any[], logOpts: LogOptions): string {
-  return colorText(
-    levels[logOpts.level],
-    `[${format(logOpts.date, DEFAULT_FORMATTER)}] [${logOpts.level}] [${logOpts.name}] - `,
-    messages
-  );
+class ColorLayout implements ILayout {
+  depth: number = Infinity;
+  format(event: ILogEvent): string {
+    return colorText(
+      levels[event.level],
+      basicLogPrefix(event),
+      event.message,
+      this.depth
+    );
+  }
 }
 
-function createAppender() {
-  return {
-    log(messages, logOpts) {
-      // eslint-disable-next-line no-console
-      console.log(defaultLayout(messages, logOpts));
-    },
-    dispose() {
-      return Promise.resolve();
-    }
-  };
-}
+export const factory = new LogFactory({
+  appenders: [
+    new ConsoleAppender(new ColorLayout())
+  ]
+});
 
-const factory = createFactory({ appender: createAppender() });
-
-export function getLogger(name: string, opts: LoggerOptions = {}) {
+export function getLogger(name: string, opts: Options = {}) {
   const logger = factory.getLogger(name);
-  logger.level(opts.level as TLogLevel);
+  logger.level = opts.level || Level.INFO;
+  ((logger.appenders.get('console') as ConsoleAppender).layout as ColorLayout).depth = opts.depth || Infinity;
   return logger;
 }
 
 export const clrsole: Clrsole = {} as any;
-Object.keys(pc).forEach((color) => {
-  clrsole[color] = (...messages: any[]) => {
-    // eslint-disable-next-line no-console
-    console.log(colorText(color, '', messages));
-  };
+Object.entries(pc).forEach(([color, fn]) => {
+  if (typeof fn === 'function') {
+    clrsole[color] = (...messages: any[]) => {
+      // eslint-disable-next-line no-console
+      console.log(colorText(color, '', messages, Infinity));
+    };
+  }
 });
 
 export * from './typings';

@@ -1,9 +1,10 @@
-import { TLogLevel } from 'base-log-factory';
-export interface LoggerOptions {
-  level?: TLogLevel;
+import { Level, TLevel } from 'base-log-factory';
+export interface Options {
+  level?: Level | TLevel;
+	depth?: number;
 }
 
-export { TLogLevel } from 'base-log-factory';
+export { Level } from 'base-log-factory';
 
 export type Formatter = (input: string | number | null | undefined) => string;
 

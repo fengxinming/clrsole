@@ -1,7 +1,7 @@
 {
   "name": "clrsole",
   "description": "colorful console.log.",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -9,7 +9,7 @@
     "deps": "npm run clean && pnpm i",
     "clean": "rm -rf node_modules",
     "build": "vite build",
-    "test": "npm run build && node ./test/index.mjs",
+    "test": "vite-node ./test/index.ts",
     "eslint": "eslint --ext .js,.mjs,.jsx,.ts,.tsx --fix --ignore-path .eslintignore ./",
     "prepare": "husky",
     "prepublishOnly": "npm run build"
@@ -30,9 +30,8 @@
   },
   "homepage": "https://github.com/fengxinming/clrsole#readme",
   "dependencies": {
-    "base-log-factory": "^1.0.2",
-    "picocolors": "^1.0.0",
-    "tslib": "^2.6.2"
+    "base-log-factory": "^2.0.2",
+    "picocolors": "^1.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.2.0",
@@ -44,8 +43,9 @@
     "eslint-plugin-simple-import-sort": "^12.1.0",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
-    "vite": "^5.2.9",
-    "vite-plugin-external": "^4.3.1"
+    "vite": "^6.2.0",
+    "vite-node": "^3.0.9",
+    "vite-plugin-external": "^6.0.0"
   },
   "files": [
     "dist"
