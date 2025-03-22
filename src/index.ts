@@ -27,7 +27,7 @@ function colorText(color: string, root: string, messages: any[], depth: number):
     }
     root += ` ${tmp}`;
   }
-  return color ? pc[color](root) : root;
+  return pc[color](root);
 }
 
 class ColorLayout implements ILayout {

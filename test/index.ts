@@ -5,8 +5,7 @@ const appLogger = getLogger('app', {
   depth: 2
 });
 
-appLogger.trace('message', null, undefined, { message: 'message2' }, new Error('error'));
-appLogger.debug('message', 'message2', {
+appLogger.trace('message', new Error('error'), {
   a: 1,
   b:
    {
@@ -19,9 +18,9 @@ appLogger.debug('message', 'message2', {
      }
    }
 });
-// eslint-disable-next-line no-undef
+appLogger.debug('message', 'message2');
 appLogger.info(NaN, 0, BigInt('9007199254740991'), Infinity);
-appLogger.warn('message', 'message2');
+appLogger.warn('message', 'message2', null, undefined);
 appLogger.error(true, false);
 appLogger.fatal('message', Symbol('message2'));
 
