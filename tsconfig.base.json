@@ -2,9 +2,9 @@
   "compilerOptions": {
     "baseUrl": ".",
     "sourceMap": false,
-    "target": "es5",
+    "target": "ES2017",
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "newLine": "LF",
     "strict": true,
     
