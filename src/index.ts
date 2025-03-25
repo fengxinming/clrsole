@@ -32,10 +32,11 @@ function colorText(color: string, root: string, messages: any[], depth: number):
 
 class ColorLayout implements ILayout {
   depth: number = Infinity;
+  dateFormat?: string;
   format(event: ILogEvent): string {
     return colorText(
       levels[event.level],
-      basicLogPrefix(event),
+      basicLogPrefix(event, this.dateFormat),
       event.message,
       this.depth
     );
@@ -51,7 +52,9 @@ export const factory = new LogFactory({
 export function getLogger(name: string, opts: Options = {}) {
   const logger = factory.getLogger(name);
   logger.level = opts.level || Level.INFO;
-  ((logger.appenders.get('console') as ConsoleAppender).layout as ColorLayout).depth = opts.depth || Infinity;
+  const layout = ((logger.appenders.get('console') as ConsoleAppender).layout as ColorLayout);
+  layout.depth = opts.depth || Infinity;
+  layout.dateFormat = opts.dateFormat;
   return logger;
 }
 

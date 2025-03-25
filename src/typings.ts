@@ -2,6 +2,7 @@ import { Level, TLevel } from 'base-log-factory';
 export interface Options {
   level?: Level | TLevel;
 	depth?: number;
+	dateFormat?: string;
 }
 
 export { Level } from 'base-log-factory';

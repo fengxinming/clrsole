@@ -1,7 +1,7 @@
 {
   "name": "clrsole",
   "description": "colorful console.log.",
-  "version": "5.0.2",
+  "version": "5.0.3",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -30,7 +30,7 @@
   },
   "homepage": "https://github.com/fengxinming/clrsole#readme",
   "dependencies": {
-    "base-log-factory": "^2.0.3",
+    "base-log-factory": "^2.0.5",
     "picocolors": "^1.0.0"
   },
   "devDependencies": {

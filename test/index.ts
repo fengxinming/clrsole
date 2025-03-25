@@ -2,7 +2,8 @@ import { clrsole, getLogger } from '../src';
 
 const appLogger = getLogger('app', {
   level: 'TRACE',
-  depth: 2
+  depth: 2,
+  dateFormat: 'HH:mm:ss.SSS'
 });
 
 appLogger.trace('message', new Error('error'), {
