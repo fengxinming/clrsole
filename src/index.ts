@@ -1,6 +1,6 @@
 import { inspect } from 'node:util';
 
-import { basicLogPrefix, ConsoleAppender, ILayout, ILogEvent, Level, LogFactory } from 'base-log-factory';
+import { basicLogPrefix, ConsoleAppender, ILayout, Level, LogEvent, LogFactory } from 'base-log-factory';
 import pc from 'picocolors';
 
 import { Clrsole, Options } from './typings';
@@ -33,7 +33,7 @@ function colorText(color: string, root: string, messages: any[], depth: number):
 class ColorLayout implements ILayout {
   depth: number = Infinity;
   dateFormat?: string;
-  format(event: ILogEvent): string {
+  format(event: LogEvent): string {
     return colorText(
       levels[event.level],
       basicLogPrefix(event, this.dateFormat),
